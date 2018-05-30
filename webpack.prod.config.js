@@ -2,6 +2,8 @@ var webpack = require('webpack');
 var path    = require('path');
 var config  = require('./webpack.config');
 
+config.devtool = 'eval-source-map';
+
 config.output = {
   filename: '[name].bundle.js',
   publicPath: '',
