@@ -1,10 +1,21 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 
-const root = path.resolve(__dirname, 'src');
+// folders
+const root = path.resolve(__dirname, 'src/app/app.module.js');
 const outputPath = path.resolve(__dirname, 'build');
-
-const fileName = 'webpack.bundle.js';
 const publicPath = 'build/';
+
+// bundle
+const fileName = 'app.bundle.js';
+
+// html
+const htmlEntry = path.resolve(__dirname, 'src/index.html');
+const htmlOutput = path.resolve(__dirname, 'build/index.html');
+
+// styles
+const stylesOutput = path.resolve(__dirname, 'build/styles/style.css');
 
 let config = {
   entry: root,
@@ -22,27 +33,45 @@ let config = {
       },
       {
         test: /\.html$/,
-        use: 'raw-loader'
+        use: [{loader: 'html-loader', options: {minimize: false}}]
       },
       {
-        test: /\.(css|sass|scss)$/,
-        use: [
-          {loader: 'style-loader'},                             // creates style nodes from JS strings
-          {loader: 'css-loader', options: {sourceMap: true}},   // translates CSS into CommonJS
-          {loader: 'sass-loader', options: {sourceMap: true}}   // compiles Sass to CSS
-        ]
+        test: /\.(css|scss)$/,
+        use: ExtractTextWebpackPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {loader: 'css-loader', options: {sourceMap: true}},   // translates CSS into CommonJS
+            {loader: 'sass-loader', options: {sourceMap: true}}
+          ]
+        })
       }
     ]
   },
-  devServer: {
-    overlay: true
-  }
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: htmlEntry,
+      filename: htmlOutput,
+      inject: 'body',
+      hash: true
+    }),
+    new ExtractTextWebpackPlugin(stylesOutput)
+  ]
 };
 
 module.exports = (env, options) => {
   let production = options.mode === 'production';
 
-  config.devtool = production ? 'source-map' : 'eval-source-map';
+  if (production) {
+    config.devtool = 'source-map';
+    config.devServer = {};
+  } else {
+    config.devtool = 'eval-source-map';
+    config.devServer = {
+      contentBase: outputPath,
+      overlay: true,
+      port: 9000
+    };
+  }
 
   return config;
 };

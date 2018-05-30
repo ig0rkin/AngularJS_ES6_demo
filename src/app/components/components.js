@@ -1,6 +1,6 @@
 import angular from 'angular';
-import Home from './home/home';
-import About from './about/about';
+import Home from './home/home.module';
+import About from './about/about.module';
 
 let componentModule = angular.module('app.components', [
   Home,
