@@ -11,7 +11,7 @@ const publicPath = './';
 const fileName = 'app.bundle.js';
 
 // html
-const htmlEntry = './src/index.html';z
+const htmlEntry = './src/index.html';
 const htmlOutput = './index.html';
 
 // styles
