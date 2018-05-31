@@ -3,19 +3,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 
 // folders
-const root = path.resolve(__dirname, 'src/app/app.module.js');
+const root = './src/app/app.module.js';
 const outputPath = path.resolve(__dirname, 'build');
-const publicPath = 'build/';
+const publicPath = './';
 
 // bundle
 const fileName = 'app.bundle.js';
 
 // html
-const htmlEntry = path.resolve(__dirname, 'src/index.html');
-const htmlOutput = path.resolve(__dirname, 'build/index.html');
+const htmlEntry = './src/index.html';z
+const htmlOutput = './index.html';
 
 // styles
-const stylesOutput = path.resolve(__dirname, 'build/styles/style.css');
+const stylesOutput = 'styles/style.css';
 
 let config = {
   entry: root,
@@ -28,8 +28,11 @@ let config = {
     rules: [
       {
         test: /\.js$/,
-        use: 'babel-loader',
-        exclude: /node_modules/
+        use: [
+          {loader: 'ng-annotate-loader', options: {add: true}},
+          {loader: 'babel-loader'}
+        ],
+        exclude: /(\.spec.js$|node_modules|vendor)/
       },
       {
         test: /\.html$/,

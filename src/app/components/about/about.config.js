@@ -7,4 +7,6 @@ const aboutConfig = ($stateProvider) => {
     });
 };
 
+// aboutConfig.$inject = ['$stateProvider'];
+
 export default aboutConfig;

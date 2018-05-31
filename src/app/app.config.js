@@ -5,4 +5,6 @@ const appConfig = ($locationProvider, $urlRouterProvider) => {
   $urlRouterProvider.otherwise('/');
 };
 
+// appConfig.$inject = ['$locationProvider', '$urlRouterProvider'];
+
 export default appConfig;
