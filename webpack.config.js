@@ -5,7 +5,7 @@ const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
 // folders
 const root = './src/app/app.module.js';
 const outputPath = path.resolve(__dirname, 'build');
-const publicPath = './';
+const publicPath = '/build/';
 
 // bundle
 const fileName = 'app.bundle.js';
