@@ -1,5 +1,6 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
+import homeService from  './home.service';
 import homeComponent from './home.component';
 import homeConfig from './home.config';
 
@@ -10,6 +11,8 @@ let homeModule = angular.module('components.home', [
 .config(homeConfig)
 
 .component('home', homeComponent)
+
+.service('homeService', homeService)
 
 .name;
 

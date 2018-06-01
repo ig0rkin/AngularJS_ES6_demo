@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "angular-mocks": "*",
+    "autoprefixer": "^8.5.2",
     "babel-core": "*",
     "babel-loader": "^7.1.4",
     "babel-plugin-transform-runtime": "*",
@@ -22,6 +23,7 @@
     "browser-sync": "*",
     "chai": "^4.1.2",
     "connect-history-api-fallback": "*",
+    "copy-webpack-plugin": "^4.5.1",
     "css-loader": "^0.28.11",
     "del": "^3.0.0",
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
@@ -44,6 +46,7 @@
     "ng-annotate-loader": "^0.6.1",
     "node-libs-browser": "^2.1.0",
     "node-sass": "^4.9.0",
+    "postcss-loader": "^2.1.5",
     "raw-loader": "*",
     "run-sequence": "^2.2.1",
     "sass-loader": "^7.0.1",

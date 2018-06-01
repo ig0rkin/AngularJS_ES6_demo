@@ -1,6 +1,8 @@
 const path = require('path');
+const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextWebpackPlugin = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // folders
 const root = './src/app/app.module.js';
@@ -15,7 +17,17 @@ const htmlEntry = './src/index.html';
 const htmlOutput = './index.html';
 
 // styles
-const stylesOutput = 'styles/style.css';
+const stylesOutput = 'static-admin/css/style.css';
+
+// assets entry
+const assetsImagesEntry = './src/assets/images';
+const assetsFontsEntry = './src/assets/fonts';
+const assetsResourcesEntry = './src/assets/resources';
+
+// assets entry
+const assetsImagesOutput = 'static-admin/images';
+const assetsFontsOutput = 'static-admin/fonts';
+const assetsResourcesOutput = 'static-admin/resources';
 
 let config = {
   entry: root,
@@ -43,8 +55,15 @@ let config = {
         use: ExtractTextWebpackPlugin.extract({
           fallback: 'style-loader',
           use: [
-            {loader: 'css-loader', options: {sourceMap: true}},   // translates CSS into CommonJS
-            {loader: 'sass-loader', options: {sourceMap: true}}
+            {loader: 'css-loader', options: {sourceMap: true, minimize: true}}, // translates CSS into CommonJS
+            {
+              loader: 'postcss-loader', options: {
+              sourceMap: true, plugins: [
+                autoprefixer({browsers: ['ie >= 10', 'last 6 version']})
+              ]
+            }
+            },
+            {loader: 'sass-loader', options: {sourceMap: true}},
           ]
         })
       }
@@ -57,7 +76,13 @@ let config = {
       inject: 'body',
       hash: true
     }),
-    new ExtractTextWebpackPlugin(stylesOutput)
+    new ExtractTextWebpackPlugin(stylesOutput),
+    new CopyWebpackPlugin([
+      {from: './conf.json', to: ''}, // example for http request
+      {from: assetsFontsEntry, to: assetsFontsOutput},
+      {from: assetsImagesEntry, to: assetsImagesOutput},
+      {from: assetsResourcesEntry, to: assetsResourcesOutput}
+    ])
   ]
 };
 
@@ -79,34 +104,3 @@ module.exports = (env, options) => {
   return config;
 };
 
-// module.exports = {
-//   devtool: 'source-map',
-//   entry: {},
-//   module: {
-//     loaders: [
-//        { test: /\.js$/, exclude: [/app\/lib/, /node_modules/], loader: 'ng-annotate!babel' },
-//        { test: /\.html$/, loader: 'raw' },
-//        { test: /\.(scss|sass)$/, loader: 'style!css!sass' },
-//        { test: /\.css$/, loader: 'style!css' }
-//     ]
-//   },
-//   plugins: [
-//     // Injects bundles in your index.html instead of wiring all manually.
-//     // It also adds hash to all injected assets so we don't have problems
-//     // with cache purging during deployment.
-//     new HtmlWebpackPlugin({
-//       template: 'client/index.html',
-//       inject: 'body',
-//       hash: true
-//     }),
-//
-//     // Automatically move all modules defined outside of application directory to vendor bundle.
-//     // If you are using more complicated project structure, consider to specify common chunks manually.
-//     new webpack.optimize.CommonsChunkPlugin({
-//       name: 'vendor',
-//       minChunks: function (module, count) {
-//         return module.resource && module.resource.indexOf(path.resolve(__dirname, 'client')) === -1;
-//       }
-//     })
-//   ]
-// };
