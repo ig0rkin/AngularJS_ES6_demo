@@ -1,5 +1,5 @@
 const homeConfig = ($stateProvider) => {
-  "ngInject";
+  'ngInject';
   $stateProvider
     .state('home', {
       url: '/',

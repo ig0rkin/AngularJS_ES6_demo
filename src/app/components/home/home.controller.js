@@ -7,6 +7,14 @@ class HomeController {
   }
 
   $onInit() {
+    console.log(this);
+  }
+
+  $onDestroy() {
+    console.log('destroy');
+  }
+
+  click() {
     this.homeService.getEnvConfig();
   }
 }

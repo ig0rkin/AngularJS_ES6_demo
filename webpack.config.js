@@ -97,7 +97,10 @@ module.exports = (env, options) => {
     config.devServer = {
       contentBase: outputPath,
       overlay: true,
-      port: 9000
+      port: 9000,
+      historyApiFallback: {
+        index: 'index.html'
+      }
     };
   }
 

@@ -1,5 +1,5 @@
 const appConfig = ($locationProvider, $urlRouterProvider) => {
-  "ngInject";
+  'ngInject';
   $locationProvider.html5Mode(true).hashPrefix('!');
 
   $urlRouterProvider.otherwise('/');

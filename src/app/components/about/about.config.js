@@ -1,5 +1,5 @@
 const aboutConfig = ($stateProvider) => {
-  "ngInject";
+  'ngInject';
   $stateProvider
     .state('about', {
       url: '/about',
