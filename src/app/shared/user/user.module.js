@@ -1,10 +1,10 @@
 import angular from 'angular';
 import userService from './user.service';
 
-let userModule = angular.module('shared.user', [])
+const userModule = angular.module('shared.user', [])
 
-.service('userService', userService)
+  .service('userService', userService)
 
-.name;
+  .name;
 
 export default userModule;

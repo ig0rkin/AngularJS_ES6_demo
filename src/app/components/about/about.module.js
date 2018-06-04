@@ -3,14 +3,14 @@ import uiRouter from 'angular-ui-router';
 import aboutComponent from './about.component';
 import aboutConfig from './about.config';
 
-let aboutModule = angular.module('components.about', [
+const aboutModule = angular.module('components.about', [
   uiRouter
 ])
 
-.config(aboutConfig)
+  .config(aboutConfig)
 
-.component('about', aboutComponent)
+  .component('about', aboutComponent)
 
-.name;
+  .name;
 
 export default aboutModule;

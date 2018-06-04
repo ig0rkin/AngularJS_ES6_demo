@@ -3,12 +3,12 @@ import Navbar from './navbar/navbar.module';
 import Hero from './hero/hero.module';
 import User from './user/user.module';
 
-let sharedModule = angular.module('app.shared', [
+const sharedModule = angular.module('app.shared', [
   Navbar,
   Hero,
   User
 ])
 
-.name;
+  .name;
 
 export default sharedModule;

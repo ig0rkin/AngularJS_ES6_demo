@@ -1,8 +1,8 @@
+import './hero.scss';
 import template from './hero.html';
 import controller from './hero.controller';
-import './hero.scss';
 
-let heroComponent = {
+const heroComponent = {
   bindings: {},
   template,
   controller

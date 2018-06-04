@@ -1,8 +1,8 @@
+import './navbar.scss';
 import template from './navbar.html';
 import controller from './navbar.controller';
-import './navbar.scss';
 
-let navbarComponent = {
+const navbarComponent = {
   bindings: {},
   template,
   controller

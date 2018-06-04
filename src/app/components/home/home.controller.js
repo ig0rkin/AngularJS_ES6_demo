@@ -11,7 +11,7 @@ class HomeController {
   }
 
   $onDestroy() {
-    console.log('destroy');
+    console.log(`destroy ${this}`);
   }
 
   click() {

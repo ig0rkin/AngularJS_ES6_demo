@@ -2,12 +2,12 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 import heroComponent from './hero.component';
 
-let heroModule = angular.module('shared.hero', [
+const heroModule = angular.module('shared.hero', [
   uiRouter
 ])
 
-.component('hero', heroComponent)
+  .component('hero', heroComponent)
 
-.name;
+  .name;
 
 export default heroModule;

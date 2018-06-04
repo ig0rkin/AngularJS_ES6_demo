@@ -1,16 +1,17 @@
 class homeService {
   constructor($http) {
     'ngInject';
+
     this.name = 'homeService';
     this.$http = $http;
   }
 
   getEnvConfig() {
     return this.$http.get('conf.json')
-      .then(response => {
+      .then((response) => {
         console.log(response);
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
       });
   }
