@@ -10,7 +10,8 @@ const outputPath = path.resolve(__dirname, 'build');
 const publicPath = '/build/';
 
 // bundle
-const fileName = 'app.bundle.js';
+const fileName = 'static-admin/app.bundle.js';
+const vendorsFileName = 'static-admin/vendors.bundle.js';
 
 // html
 const htmlEntry = './src/index.html';
@@ -29,7 +30,7 @@ const assetsImagesOutput = 'static-admin/images';
 const assetsFontsOutput = 'static-admin/fonts';
 const assetsResourcesOutput = 'static-admin/resources';
 
-let config = {
+const config = {
   entry: root,
   output: {
     path: outputPath,
@@ -57,17 +58,30 @@ let config = {
           use: [
             {loader: 'css-loader', options: {sourceMap: true, minimize: true}}, // translates CSS into CommonJS
             {
-              loader: 'postcss-loader', options: {
-              sourceMap: true, plugins: [
-                autoprefixer({browsers: ['ie >= 10', 'last 6 version']})
-              ]
-            }
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true,
+                plugins: [
+                  autoprefixer({browsers: ['ie >= 10', 'last 6 version']})
+                ]
+              }
             },
-            {loader: 'sass-loader', options: {sourceMap: true}},
+            {loader: 'sass-loader', options: {sourceMap: true}}
           ]
         })
       }
     ]
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all'
+        }
+      }
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -87,7 +101,7 @@ let config = {
 };
 
 module.exports = (env, options) => {
-  let production = options.mode === 'production';
+  const production = options.mode === 'production';
 
   if (production) {
     config.devtool = 'source-map';

@@ -2,6 +2,7 @@
   "extends": "airbnb-base",
   "rules": {
     "comma-dangle": ["error", "never"],
-    "linebreak-style": ["error", "unix"]
+    "linebreak-style": ["error", "unix"],
+    "object-curly-spacing": ["error", "never"]
   }
 }
